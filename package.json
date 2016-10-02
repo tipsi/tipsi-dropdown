@@ -1,0 +1,22 @@
+{
+  "name": "tipsi-dropdown",
+  "version": "0.0.1",
+  "description": "A react-native Dropdown component for IOS and Android",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tipsi/tipsi-dropdown.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tipsi/tipsi-dropdown/issues"
+  },
+  "homepage": "https://github.com/tipsi/tipsi-dropdown#readme"
+}
