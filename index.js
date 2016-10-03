@@ -1,18 +1,28 @@
+'use strict';
 import React, { Component, PropTypes } from 'react';
-import { requireNativeComponent, View } from 'react-native';
+import { requireNativeComponent, View, DeviceEventEmitter } from 'react-native';
 
 var NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown);
 
-export default class Dropdown extends React.Component {
-  constructor() {
-    super();
+class Dropdown extends React.Component {
+  constructor(props) {
+    super(props);
     this._onChange = this._onChange.bind(this);
   }
 
-  _onChange(event) {
-    if (this.props.onChange) {
-      this.props.onChange(event.nativeEvent);
+  _onChange(event: Event) {
+    if (!this.props.onItemChanged) {
+      return;
     }
+    this.props.onItemChanged(event);
+  }
+
+  componentWillMount() {
+      DeviceEventEmitter.addListener('onItemChanged', this._onChange);
+  }
+
+  componentWillUnmount() {
+      DeviceEventEmitter.removeListener('onItemChanged', this._onChange);
   }
 
   render() {
@@ -27,15 +37,10 @@ export default class Dropdown extends React.Component {
 
 Dropdown.propTypes = {
   ...View.propTypes,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.array,
   styling: PropTypes.string,
   selected: PropTypes.number,
-  onChange: PropTypes.func
+  onItemChanged: PropTypes.func
 };
-
-Dropdown.defaultProps = {
-  values: [ '' ],
-  selected: 0
-}
 
 module.exports = Dropdown;
