@@ -1,8 +1,14 @@
 package com.gettipsi.tipsidropdown;
 
+import android.view.View;
+
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -11,9 +17,22 @@ import com.gettipsi.tpsdropdown.DropdownContainer;
 
 public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
-    private static final String REACT_CLASS_NAME = "TPSDropDown";
+    private static final String REACT_CLASS_NAME = "TipsiDropdown";
 
     private Dropdown dropdown;
+
+    private Dropdown.DropdownUpdateEvent dropdownUpdateEvent = new Dropdown.DropdownUpdateEvent() {
+        @Override
+        public void onUpdate(View view, int id, int pos, String selectedItem) {
+            WritableMap eventData = Arguments.createMap();
+            eventData.putInt("selected", pos);
+            eventData.putString("value", selectedItem);
+            ReactContext reactContext = (ReactContext) view.getContext();
+            reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit("onItemChanged", eventData);
+        }
+    };
 
     @Override
     public String getName() {
@@ -24,6 +43,7 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     protected DropdownContainer createViewInstance(final ThemedReactContext reactContext) {
         DropdownContainer dropdownContainer = new DropdownContainer(reactContext);
         dropdown = dropdownContainer.getDropdown();
+        dropdown.setDropdownUpdateEvent(dropdownUpdateEvent);
         return dropdownContainer;
     }
 
