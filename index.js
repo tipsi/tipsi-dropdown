@@ -4,43 +4,50 @@ import { requireNativeComponent, View, DeviceEventEmitter } from 'react-native';
 
 var NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown);
 
-class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this._onChange = this._onChange.bind(this);
+export default class Dropdown extends React.Component {
+  static propTypes = {
+    ...View.propTypes,
+    options: PropTypes.array,
+    value: PropTypes.number,
+    onChange: PropTypes.func,
+    style: PropTypes.shape({
+      indicatorImageName: PropTypes.style,
+      backgroundColor: PropTypes.string,
+      fontName: PropTypes.string,
+      fontSize: PropTypes.number,
+      textAlignment: PropTypes.string,
+      cornerRadius: PropTypes.number,
+      separatorHeight: PropTypes.number,
+      separatorColor: PropTypes.string,
+      borderWidth: PropTypes.number,
+      borderColor: PropTypes.string,
+      textColor: PropTypes.string
+    })
   }
 
-  _onChange(event: Event) {
-    if (!this.props.onItemChanged) {
-      return;
-    }
-    this.props.onItemChanged(event);
-  }
-
-  componentWillMount() {
-      DeviceEventEmitter.addListener('onItemChanged', this._onChange);
-  }
-
-  componentWillUnmount() {
-      DeviceEventEmitter.removeListener('onItemChanged', this._onChange);
+  static defaultProps = {
+    onChange: (event) => { console.log(event.nativeEvent); }
   }
 
   render() {
     return (
       <NativeDropdown
-        {...this.props} onChange={this._onChange}
-        items={this.props.items} selected={this.props.selected}
-        styling={this.props.styling}/>
+        {...this.props}
+        onChange={this.props.onChange}
+        options={this.props.items}
+        value={this.props.selected}
+        style={this.props.style}
+        indicatorImageName={this.props.style.indicatorImageName}
+        fontName={this.props.style.fontName}
+        fontSize={this.props.style.fontSize}
+        textAlignment={this.props.style.textAlignment}
+        cornerRadius={this.props.style.cornerRadius}
+        separatorHeight={this.props.style.separatorHeight}
+        separatorColor={this.props.style.separatorColor}
+        borderWidth={this.props.style.borderWidth}
+        borderColor={this.props.style.borderColor}
+        textColor={this.props.style.textColor}
+        />
     );
   }
 }
-
-Dropdown.propTypes = {
-  ...View.propTypes,
-  items: PropTypes.array,
-  styling: PropTypes.string,
-  selected: PropTypes.number,
-  onItemChanged: PropTypes.func
-};
-
-module.exports = Dropdown;
