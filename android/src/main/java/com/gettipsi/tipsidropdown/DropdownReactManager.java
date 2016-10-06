@@ -1,6 +1,5 @@
 package com.gettipsi.tipsidropdown;
 
-import android.graphics.Color;
 import android.view.View;
 
 import com.facebook.react.bridge.Callback;
@@ -11,6 +10,7 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.gettipsi.tpsdropdown.Adapter;
 import com.gettipsi.tpsdropdown.Dropdown;
 import com.gettipsi.tpsdropdown.DropdownContainer;
 import com.gettipsi.tpsdropdown.DropdownStylist;
@@ -86,9 +86,9 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         return dropdownContainer;
     }
 
-    @ReactProp(name = PROP_BACKGROUND_COLOR, defaultInt = Color.TRANSPARENT)
-    public void setBackgroundColor(DropdownContainer dropdown, Integer value) {
-        updateString(dropdown, PROP_BACKGROUND_COLOR, converColor(value));
+    @ReactProp(name = PROP_BACKGROUND_COLOR)
+    public void setBackgroundColor(DropdownContainer dropdown, String value) {
+        updateString(dropdown, PROP_BACKGROUND_COLOR, value);
     }
 
     @ReactProp(name = PROP_BORDER_WIDTH)
@@ -97,8 +97,8 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     }
 
     @ReactProp(name = PROP_BORDER_COLOR)
-    public void setBorderColor(DropdownContainer dropdown, Integer value) {
-        updateString(dropdown, PROP_BORDER_COLOR, converColor(value));
+    public void setBorderColor(DropdownContainer dropdown, String value) {
+        updateString(dropdown, PROP_BORDER_COLOR, value);
     }
 
     @ReactProp(name = PROP_CORNER_RADIUS)
@@ -112,8 +112,8 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     }
 
     @ReactProp(name = PROP_DIVIDER_COLOR)
-    public void setDividerColor(DropdownContainer dropdown, Integer value) {
-        updateString(dropdown, PROP_DIVIDER_COLOR, converColor(value));
+    public void setDividerColor(DropdownContainer dropdown, String value) {
+        updateString(dropdown, PROP_DIVIDER_COLOR, value);
     }
 
     @ReactProp(name = PROP_FONT_NAME)
@@ -127,8 +127,8 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     }
 
     @ReactProp(name = PROP_TEXT_COLOR)
-    public void setTextColor(DropdownContainer dropdown, Integer value) {
-        updateString(dropdown, PROP_TEXT_COLOR, converColor(value));
+    public void setTextColor(DropdownContainer dropdown, String value) {
+        updateString(dropdown, PROP_TEXT_COLOR, value);
     }
 
     @ReactProp(name = PROP_TEXT_ALIGN)
@@ -141,19 +141,16 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         updateString(dropdown, PROP_INDICATOR_IMAGE_NAME, value);
     }
 
-    @ReactProp(name = "items")
+    @ReactProp(name = "options")
     public void setItems(DropdownContainer dropdown, ReadableArray items) {
         dropdown.setupWithElements(Converter.toList(items));
+        updateView(dropdown);
     }
 
-    @ReactProp(name = "selected")
+    @ReactProp(name = "value")
     public void setSelected(DropdownContainer dropdown, int selected) {
         dropdown.getDropdown().setSelected(selected);
-    }
-
-    @ReactProp(name = "styling")
-    public void setStyling(DropdownContainer dropdown, String style) {
-        dropdown.setStyle(style);
+        updateView(dropdown);
     }
 
     @ReactMethod
@@ -223,8 +220,8 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         }
         DropdownStylist.getInstance().parseStyle(jsonObject.toString());
         dropdown.invalidate();
-        if (dropdown.getDropdown() != null) {
-            dropdown.invalidate();
+        if (dropdown.getDropdown() != null && dropdown.getDropdown().getAdapter() != null) {
+            ((Adapter) dropdown.getDropdown().getAdapter()).notifyDataSetChanged();
         }
     }
 
