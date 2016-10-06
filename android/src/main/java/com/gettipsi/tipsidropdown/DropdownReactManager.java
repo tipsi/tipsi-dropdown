@@ -1,6 +1,9 @@
 package com.gettipsi.tipsidropdown;
 
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactContext;
@@ -22,6 +25,8 @@ import java.lang.ref.WeakReference;
 
 public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
+    private static final String PROP_OPTIONS = "options";
+    private static final String PROP_VALUE = "value";
     private static final String PROP_BACKGROUND_COLOR = "backgroundColor";
     private static final String PROP_BORDER_WIDTH = "borderWidth";
     private static final String PROP_BORDER_COLOR = "borderColor";
@@ -82,6 +87,9 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         DropdownContainer dropdownContainer = new DropdownContainer(reactContext);
         dropdown = dropdownContainer.getDropdown();
         dropdown.setDropdownUpdateEvent(dropdownUpdateEvent);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START | Gravity.CENTER_VERTICAL);
+        dropdown.setLayoutParams(params);
         this.dropdownContainer = new WeakReference<>(dropdownContainer);
         return dropdownContainer;
     }
@@ -141,13 +149,13 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         updateString(dropdown, PROP_INDICATOR_IMAGE_NAME, value);
     }
 
-    @ReactProp(name = "options")
+    @ReactProp(name = PROP_OPTIONS)
     public void setItems(DropdownContainer dropdown, ReadableArray items) {
         dropdown.setupWithElements(Converter.toList(items));
         updateView(dropdown);
     }
 
-    @ReactProp(name = "value")
+    @ReactProp(name = PROP_VALUE)
     public void setSelected(DropdownContainer dropdown, int selected) {
         dropdown.getDropdown().setSelected(selected);
         updateView(dropdown);
@@ -223,10 +231,6 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         if (dropdown.getDropdown() != null && dropdown.getDropdown().getAdapter() != null) {
             ((Adapter) dropdown.getDropdown().getAdapter()).notifyDataSetChanged();
         }
-    }
-
-    private String converColor(Integer intColor) {
-        return String.format("#%06X", (0xFFFFFF & intColor));
     }
 
 }
