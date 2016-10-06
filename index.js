@@ -9,7 +9,7 @@ export default class Dropdown extends Component {
     options: PropTypes.array,
     value: PropTypes.number,
     onChange: PropTypes.func,
-    indicatorImageName: PropTypes.style,
+    indicatorImageName: PropTypes.string,
     backgroundColor: PropTypes.string,
     fontName: PropTypes.string,
     fontSize: PropTypes.number,
