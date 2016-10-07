@@ -4,14 +4,16 @@
     "env": {
         "browser": true,
         "node": true,
-        "es6": true
+        "es6": true,
     },
     "rules": {
       "react/jsx-filename-extension": 0,
       "react/prefer-stateless-function": 0,
+      "import/no-extraneous-dependencies": 0,
       "import/no-unresolved": 0,
       "import/extensions": 0,
-      "indent": ["error", 2]
+      "indent": ["error", 2],
+      "semi": ["error", "never"],
     },
     "plugins": [
         "react",
