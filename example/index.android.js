@@ -4,7 +4,7 @@ import Dropdown from 'tipsi-dropdown';
 
 class example extends Component {
   handleChanged = (event) => {
-      console.log(event);
+    console.log(event);
   }
 
   render() {
@@ -27,8 +27,8 @@ class example extends Component {
             position: 'absolute',
             top: 25,
             left: 25,
-            width:156,
-            height:40,
+            width: 156,
+            height: 40,
           }}
         />
       </View>

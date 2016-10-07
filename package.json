@@ -1,7 +1,7 @@
 {
   "name": "tipsi-dropdown",
   "version": "0.0.1",
-  "description": "A react-native Dropdown component for IOS and Android",
+  "description": "A react-native Dropdown component for iOS and Android",
   "main": "index.js",
   "directories": {
     "example": "example"
@@ -18,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/tipsi/tipsi-dropdown/issues"
   },
-  "homepage": "https://github.com/tipsi/tipsi-dropdown#readme"
+  "homepage": "https://github.com/tipsi/tipsi-dropdown#readme",
+  "peerDependencies": {
+    "react-native": "*",
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.0.0",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0"
+  }
 }

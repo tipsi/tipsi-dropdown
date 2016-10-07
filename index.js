@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { requireNativeComponent, View } from 'react-native';
 
-const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown);
-
 export default class Dropdown extends Component {
   static propTypes = {
     ...View.propTypes,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(PropTypes.string),
     value: PropTypes.number,
     onChange: PropTypes.func,
     indicatorImageName: PropTypes.string,
@@ -19,7 +17,7 @@ export default class Dropdown extends Component {
     separatorColor: PropTypes.string,
     borderWidth: PropTypes.number,
     borderColor: PropTypes.string,
-    textColor: PropTypes.string
+    textColor: PropTypes.string,
   }
 
   render() {
@@ -28,3 +26,5 @@ export default class Dropdown extends Component {
     );
   }
 }
+
+const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown);
