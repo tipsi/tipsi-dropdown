@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/tipsi/tipsi-dropdown#readme",
   "peerDependencies": {
-    "react-native": "*",
+    "react-native": "*"
   },
   "devDependencies": {
     "babel-eslint": "^7.0.0",
