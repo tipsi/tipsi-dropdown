@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { requireNativeComponent, View } from 'react-native';
+import React, { Component, PropTypes } from 'react'
+import { requireNativeComponent, View } from 'react-native'
 
 export default class Dropdown extends Component {
   static propTypes = {
@@ -23,8 +23,8 @@ export default class Dropdown extends Component {
   render() {
     return (
       <NativeDropdown {...this.props} />
-    );
+    )
   }
 }
 
-const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown);
+const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown)
