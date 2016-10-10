@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { requireNativeComponent, View } from 'react-native'
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
+import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropType'
 
 export default class Dropdown extends Component {
   static propTypes = {
     ...View.propTypes,
-    options: PropTypes.arrayOf(PropTypes.string),
     value: PropTypes.number,
+    options: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func,
-    indicatorImageName: PropTypes.string,
+    indicatorImage: ImageSourcePropType,
     backgroundColor: PropTypes.string,
     fontName: PropTypes.string,
     fontSize: PropTypes.number,
@@ -21,10 +23,22 @@ export default class Dropdown extends Component {
   }
 
   render() {
+    const { indicatorImage, ...props } = this.props
+    const indicatorImageName = indicatorImage &&
+      resolveAssetSource(indicatorImage).uri
+
     return (
-      <NativeDropdown {...this.props} />
+      <NativeDropdown
+        indicatorImageName={indicatorImageName}
+        {...props}
+      />
     )
   }
 }
 
-const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown)
+const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
+  nativeOnly: {
+    style: true,
+    indicatorImageName: true,
+  },
+})

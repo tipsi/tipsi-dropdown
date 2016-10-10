@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
-import { AppRegistry, View } from 'react-native';
-import Dropdown from 'tipsi-dropdown';
+import React, { Component } from 'react'
+import { AppRegistry, View, Text } from 'react-native'
+import Dropdown from 'tipsi-dropdown'
 
 class example extends Component {
+  state = {
+    value: 'three',
+    options: ['one', 'two', 'three', 'four'],
+  }
+
   handleChanged = (event) => {
-    console.log(event);
+    console.log(event.nativeEvent)
   }
 
   render() {
     return (
       <View>
         <Dropdown
-          options={['one', 'two', 'three', 'four']}
+          options={this.state.options}
           onChange={this.handleChanged}
           backgroundColor="#AAAAAA"
           borderColor="#0000FF"
-          indicatorImageName="custom_triangle.png"
           fontSize={18}
           separatorHeight={2}
           separatorColor="#0000FF"
@@ -23,6 +27,7 @@ class example extends Component {
           textColor="#000000"
           textAlignment="Left"
           cornerRadius={20}
+          indicatorImage={require('./plus.png')}
           style={{
             position: 'absolute',
             top: 25,
@@ -31,9 +36,12 @@ class example extends Component {
             height: 40,
           }}
         />
+        <Text>
+          Current value: {this.state.value}
+        </Text>
       </View>
-    );
+    )
   }
 }
 
-AppRegistry.registerComponent('example', () => example);
+AppRegistry.registerComponent('example', () => example)

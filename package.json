@@ -41,5 +41,8 @@
     "tape": "^4.6.2",
     "tape-async": "^2.1.1",
     "webdriverio": "^4.2.16"
+  },
+  "dependencies": {
+    "react-native": "^0.34.1"
   }
 }
