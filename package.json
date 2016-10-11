@@ -2,12 +2,14 @@
   "name": "tipsi-dropdown",
   "version": "0.0.1",
   "description": "A react-native Dropdown component for iOS and Android",
+  "nativePackage": true,
   "main": "index.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "test": "babel-node ./test/utils/run.js"
+    "test": "babel-node ./test/utils/run.js",
+    "build:example": "cd example && npm run build"
   },
   "repository": {
     "type": "git",

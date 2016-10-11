@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppRegistry, View, Text } from 'react-native'
+import { AppRegistry, View } from 'react-native'
 import Dropdown from 'tipsi-dropdown'
 
 class example extends Component {
@@ -36,9 +36,6 @@ class example extends Component {
             height: 40,
           }}
         />
-        <Text>
-          Current value: {this.state.value}
-        </Text>
       </View>
     )
   }
