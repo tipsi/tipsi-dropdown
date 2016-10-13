@@ -36,9 +36,6 @@ export default class Dropdown extends Component {
   }
 }
 
-Dropdown.Item = class extends Component { // eslint-disable-line react/no-multi-comp
-}
-
 const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
   nativeOnly: {
     indicatorImageName: true,

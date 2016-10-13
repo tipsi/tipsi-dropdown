@@ -8,7 +8,7 @@ const {
   APPIUM_HOST = 'localhost',
   APPIUM_PORT = '4723',
   APK_PACKAGE = 'com.example',
-  APK_PATH = path.resolve(__dirname, '../../example/android/app/build/outputs/apk/app-release.apk'),
+  APK_PATH = path.resolve(__dirname, '../../android/app/build/outputs/apk/app-release.apk'),
   TEST_CASES_PATH = 'test/*_test_*.js',
 } = process.env
 
