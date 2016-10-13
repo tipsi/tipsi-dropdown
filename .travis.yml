@@ -16,7 +16,7 @@ install:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
-  - travis_wait (cd example && npm install)
+  - (cd example && travis_wait npm install)
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
