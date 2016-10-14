@@ -7,7 +7,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "build": "npm run clean && npm run build:key && npm run build:release",
     "build:key": "keytool -genkey -v -keystore android/app/release.keystore -storepass android -alias androidreleasekey -keypass android -dname 'CN=Android Debug,O=Android,C=US'",
-    "build:release": "cd android && ./gradlew assembleRelease",
+    "build:release": "cd android && ./gradlew assembleRelease --console=plain -d -S",
     "clean": "rm -rf android/app/release.keystore"
   },
   "dependencies": {
