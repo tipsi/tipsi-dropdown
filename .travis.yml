@@ -1,25 +1,22 @@
-os: linux
 language: android
-sudo: false
 
 android:
   components:
     - platform-tools
     - tools
     - build-tools-24.0.2
-    - android-21
     - android-24
     - sys-img-armeabi-v7a-android-21
     - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-google-google_play_services
 
 before_install:
+  - nvm install stable
   - cd example
 
 install:
-  - . $HOME/.nvm/nvm.sh
-  - nvm install stable
-  - nvm use stable
-  - travis_wait npm install
+  - npm install
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
