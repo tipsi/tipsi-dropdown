@@ -10,6 +10,7 @@ android:
     - extra-android-m2repository
     - extra-google-m2repository
     - extra-google-google_play_services
+    - addon-google_apis-google-16
 
 before_install:
   - nvm install stable
