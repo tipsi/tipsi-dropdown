@@ -2,10 +2,15 @@ language: android
 jdk: oraclejdk8
 sudo: required
 
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
 cache:
   directories:
     - $HOME/.npm
     - example/node_modules
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 android:
   components:
@@ -29,7 +34,7 @@ before_script:
   - android-wait-for-emulator
   - sleep 60
   - adb shell input keyevent 82 &
-  - appium --session-override &
+  - appium --session-override > appium.out &
 
 script:
   - npm run build
