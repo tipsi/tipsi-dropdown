@@ -1,6 +1,11 @@
 language: android
 sudo: required
 
+cache:
+  directories:
+    - $HOME/.npm
+    - example/node_modules
+
 android:
   components:
     - platform-tools

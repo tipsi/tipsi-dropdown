@@ -142,7 +142,8 @@ android {
 dependencies {
     compile project(':tipsi-dropdown')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:24.2.1"
+    compile "com.android.support:appcompat-v7:+"
+    compile "com.android.support:support-v4:+"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
