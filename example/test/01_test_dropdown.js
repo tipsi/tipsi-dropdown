@@ -16,7 +16,7 @@ test('Test if user can select items from dropdown', async (t) => {
   const item4 = idFromXPath(`//android.widget.ListView[1]/
     android.widget.LinearLayout[4]/android.widget.TextView[1]`)
 
-  await driver.waitForVisible(dropdownValueId, 20000)
+  await driver.waitForVisible(dropdownValueId, 60000)
 
   const selectedItem1 = await driver.getText(dropdownValueId)
   t.equal('one', selectedItem1, 'User should see selected item "One"')
