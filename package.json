@@ -4,6 +4,9 @@
   "description": "A react-native Dropdown component for iOS and Android",
   "nativePackage": true,
   "main": "index.js",
+  "scripts": {
+    "ci": "scripts/local-ci.sh"
+  },
   "directories": {
     "example": "example"
   },

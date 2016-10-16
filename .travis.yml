@@ -1,3 +1,4 @@
+os: linux
 language: android
 jdk: oraclejdk8
 sudo: required
@@ -24,10 +25,8 @@ android:
 
 before_install:
   - nvm install stable
-  - cd example
 
-install:
-  - npm install
+install: scripts/install.sh
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
@@ -37,6 +36,4 @@ before_script:
   - adb shell input keyevent 82 &
   - appium --session-override > appium.out &
 
-script:
-  - npm run build
-  - npm run test
+script: scripts/ci.sh
