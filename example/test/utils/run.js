@@ -56,5 +56,7 @@ let DEVICE_PLATFORM = process.env.DEVICE_PLATFORM;
 
     // Close Helper
     await helper.release()
+    // Exit with failure code
+    process.exit(1);
   }
 }())

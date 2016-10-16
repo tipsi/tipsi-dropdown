@@ -34,6 +34,6 @@ before_script:
   - android-wait-for-emulator
   - sleep 60
   - adb shell input keyevent 82 &
-  - appium --session-override > appium.out &
+  - example/node_modules/.bin/appium --session-override > appium.out &
 
 script: scripts/ci.sh
