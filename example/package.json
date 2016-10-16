@@ -5,11 +5,11 @@
   "scripts": {
     "test": "babel-node ./test/utils/run.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "build": "npm run clean && npm run build:key && npm run build:release",
-    "build:key": "keytool -genkey -v -keystore android/app/release.keystore -storepass android -alias androidreleasekey -keypass android -dname 'CN=Android Debug,O=Android,C=US'",
-    "build:release": "cd android && ./gradlew assembleRelease --console=plain -S",
-    "appium": "appium",
     "clean": "rm -rf android/app/release.keystore",
+    "appium": "appium",
+    "build:android:key": "keytool -genkey -v -keystore android/app/release.keystore -storepass android -alias androidreleasekey -keypass android -dname 'CN=Android Debug,O=Android,C=US'",
+    "build:android:release": "cd android && ./gradlew assembleRelease --console=plain -S",
+    "build:android": "npm-run-all clean build:android:*",
     "postinstall": "npm i appium --no-shrinkwrap"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.16.3",
     "glob": "^7.1.0",
+    "npm-run-all": "^3.1.1",
     "tap-diff": "^0.1.1",
     "tape": "^4.6.2",
     "tape-async": "^2.1.1",
