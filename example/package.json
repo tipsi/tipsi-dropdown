@@ -10,6 +10,7 @@
     "build:android:key": "keytool -genkey -v -keystore android/app/release.keystore -storepass android -alias androidreleasekey -keypass android -dname 'CN=Android Debug,O=Android,C=US'",
     "build:android:release": "cd android && ./gradlew assembleRelease --console=plain -S",
     "build:android": "npm-run-all clean build:android:*",
+    "build:ios": "cd ios && xcodebuild build -scheme example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' -configuration Release -derivedDataPath build",
     "postinstall": "npm i appium --no-shrinkwrap"
   },
   "dependencies": {
