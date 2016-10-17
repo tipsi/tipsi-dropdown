@@ -22,6 +22,7 @@ before_cache:
 
 cache:
   directories:
+    - $HOME/.nvm
     - $HOME/.npm
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
