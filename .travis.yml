@@ -1,7 +1,20 @@
-os: linux
-language: android
-jdk: oraclejdk8
-sudo: required
+matrix:
+  include:
+    - os: osx
+      language: objective-c
+      osx_image: xcode8
+    - os: linux
+      language: android
+      jdk: oraclejdk8
+      sudo: required
+      android:
+        components:
+          - platform-tools
+          - tools
+          - build-tools-24.0.2
+          - android-24
+          - sys-img-armeabi-v7a-android-21
+          - extra-android-m2repository
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -14,26 +27,11 @@ cache:
     - $HOME/.gradle/wrapper/
     - example/node_modules
 
-android:
-  components:
-    - platform-tools
-    - tools
-    - build-tools-24.0.2
-    - android-24
-    - sys-img-armeabi-v7a-android-21
-    - extra-android-m2repository
-
 before_install:
   - nvm install stable
 
 install: scripts/install.sh
 
-before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - sleep 60
-  - adb shell input keyevent 82 &
-  - example/node_modules/.bin/appium --session-override > appium.out &
+before_script: scripts/before-ci.sh
 
 script: scripts/ci.sh
