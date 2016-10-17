@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case "${TRAVIS_OS_NAME}" in
-  ios)
+  osx)
     cd example
     npm install
   ;;
