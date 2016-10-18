@@ -10,12 +10,32 @@ const dropdownStyle = {
   height: 40,
 }
 
+const dropdownStyle2 = {
+  position: 'absolute',
+  top: 70,
+  left: 25,
+  width: 156,
+  height: 40,
+}
+
 const dropdownItemStyle = {
   backgroundColor: '#AAAAAA',
   borderColor: '#0000FF',
   fontSize: 18,
   separatorHeight: 2,
   separatorColor: '#0000FF',
+  fontName: 'Arial',
+  textColor: '#000000',
+  textAlignment: 'Left',
+  cornerRadius: 20,
+}
+
+const dropdownItemStyle2 = {
+  backgroundColor: '#AA00AA',
+  borderColor: '#0000FF',
+  fontSize: 18,
+  separatorHeight: 2,
+  separatorColor: '#00FF00',
   fontName: 'Arial',
   textColor: '#000000',
   textAlignment: 'Left',
@@ -31,10 +51,18 @@ class example extends Component {
     console.log(event.nativeEvent)
   }
 
+  handleChange2 = (event) => {
+    console.log(event.nativeEvent)
+  }
+
   handleValueChange = (item, index) => {
     console.log(item, index)
+    this.setState({ value: item})
+  }
 
-    this.setState({ value: item.value })
+  handleValueChange2 = (item, index) => {
+    console.log(item, index)
+    this.setState({ value: item })
   }
 
   render() {
@@ -52,6 +80,18 @@ class example extends Component {
           <Dropdown.Item label="Three" value="three" />
           <Dropdown.Item label="Four" value="four" />
         </Dropdown>
+          <Dropdown
+            style={dropdownStyle2}
+            itemStyle={dropdownItemStyle2}
+            value={this.state.value}
+            indicator={require('./plus.png')}
+            onChange={this.handleChanged2}
+            onValueChange={this.handleValueChange2}>
+            <Dropdown.Item label="One" value="one" />
+            <Dropdown.Item label="Two" value="two" />
+            <Dropdown.Item label="Three" value="three" />
+            <Dropdown.Item label="Four" value="four" />
+          </Dropdown>
       </View>
     )
   }

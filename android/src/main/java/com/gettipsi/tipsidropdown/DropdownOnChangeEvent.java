@@ -1,28 +1,21 @@
 package com.gettipsi.tipsidropdown;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
-public class DropdownEvent extends Event<DropdownEvent> {
+public class DropdownOnChangeEvent extends Event<DropdownOnChangeEvent> {
 
     private static final String EVENT_NAME = "topChange";
     private final int mPosition;
-    private final String mValue;
+    private final ReadableMap mValue;
 
-    public DropdownEvent(int viewId, int position, String value) {
+    public DropdownOnChangeEvent(int viewId, int position, ReadableMap value) {
         super(viewId);
         mPosition = position;
         mValue = value;
-    }
-
-    public int getPosition() {
-        return mPosition;
-    }
-
-    public String getValue() {
-        return mValue;
     }
 
     @Override
@@ -42,8 +35,8 @@ public class DropdownEvent extends Event<DropdownEvent> {
 
     private WritableMap serializeEventData() {
         WritableMap eventData = Arguments.createMap();
-        eventData.putInt("selected", getPosition());
-        eventData.putString("value", getValue());
+        eventData.putInt("newIndex", mPosition);
+        eventData.putString("newValue", mValue.getString("value"));
         return eventData;
     }
 }

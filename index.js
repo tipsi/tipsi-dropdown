@@ -57,13 +57,13 @@ export default class Dropdown extends Component {
   }
 
   // Translate Dropdown prop and children into stuff that TipsiDropdown understands.
-  stateFromProps = (props) => {
+stateFromProps(props) {
     const { children, selectedValue } = props
     let selectedIndex = 0
     const items = []
 
     Children.toArray(children).forEach((child, index) => {
-      const { value, label } = child
+      const { value, label } = child.props
       if (value === selectedValue) {
         selectedIndex = index
       }
