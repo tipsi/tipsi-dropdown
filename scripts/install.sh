@@ -3,8 +3,8 @@
 case "${TRAVIS_OS_NAME}" in
   osx)
     cd example
-    pod install --project-directory=ios
     npm install
+    pod install --project-directory=ios
   ;;
   linux)
     cd example
