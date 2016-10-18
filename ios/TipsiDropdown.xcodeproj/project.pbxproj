@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		3A0E93BF1DBE3AC8001FE08C /* TipsiDropdownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E93BE1DBE3AC8001FE08C /* TipsiDropdownManager.m */; };
+=======
+>>>>>>> Initial build implementation for CocoaPods
 		3AF018191DB6844300D89CEA /* TipsiDropdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF018181DB6844300D89CEA /* TipsiDropdown.m */; };
 		3AF0181A1DB6844300D89CEA /* TipsiDropdown.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AF018171DB6844300D89CEA /* TipsiDropdown.h */; };
 /* End PBXBuildFile section */
@@ -26,8 +29,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		3A0E93BD1DBE3AC8001FE08C /* TipsiDropdownManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsiDropdownManager.h; sourceTree = "<group>"; };
 		3A0E93BE1DBE3AC8001FE08C /* TipsiDropdownManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsiDropdownManager.m; sourceTree = "<group>"; };
+=======
+>>>>>>> Initial build implementation for CocoaPods
 		3AF018141DB6844300D89CEA /* libTipsiDropdown.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTipsiDropdown.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF018171DB6844300D89CEA /* TipsiDropdown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TipsiDropdown.h; sourceTree = "<group>"; };
 		3AF018181DB6844300D89CEA /* TipsiDropdown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TipsiDropdown.m; sourceTree = "<group>"; };
@@ -65,8 +71,11 @@
 			children = (
 				3AF018171DB6844300D89CEA /* TipsiDropdown.h */,
 				3AF018181DB6844300D89CEA /* TipsiDropdown.m */,
+<<<<<<< HEAD
 				3A0E93BD1DBE3AC8001FE08C /* TipsiDropdownManager.h */,
 				3A0E93BE1DBE3AC8001FE08C /* TipsiDropdownManager.m */,
+=======
+>>>>>>> Initial build implementation for CocoaPods
 			);
 			path = TipsiDropdown;
 			sourceTree = "<group>";
@@ -128,7 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				3A0E93BF1DBE3AC8001FE08C /* TipsiDropdownManager.m in Sources */,
+=======
+>>>>>>> Initial build implementation for CocoaPods
 				3AF018191DB6844300D89CEA /* TipsiDropdown.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +239,7 @@
 		3AF0181E1DB6844300D89CEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -234,6 +247,8 @@
 					"${SRCROOT}/../../../ios/Pods/Headers/Public/TPSDropDown/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+=======
+>>>>>>> Initial build implementation for CocoaPods
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -243,6 +258,7 @@
 		3AF0181F1DB6844300D89CEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -250,6 +266,8 @@
 					"${SRCROOT}/../../../ios/Pods/Headers/Public/TPSDropDown/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+=======
+>>>>>>> Initial build implementation for CocoaPods
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
