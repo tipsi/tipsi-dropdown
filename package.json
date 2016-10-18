@@ -20,6 +20,12 @@
     "url": "https://github.com/tipsi/tipsi-dropdown/issues"
   },
   "homepage": "https://github.com/tipsi/tipsi-dropdown#readme",
+  "rnpm": {
+    "commands": {
+      "prelink": "node_modules/tipsi-dropdown/bin/pre-link.sh",
+      "postlink": "node_modules/tipsi-dropdown/bin/post-link.sh"
+    }
+  },
   "peerDependencies": {
     "react-native": "*"
   },
