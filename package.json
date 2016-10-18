@@ -22,8 +22,8 @@
   "homepage": "https://github.com/tipsi/tipsi-dropdown#readme",
   "rnpm": {
     "commands": {
-      "prelink": "node_modules/tipsi-dropdown/bin/pre-link.sh",
-      "postlink": "node_modules/tipsi-dropdown/bin/post-link.sh"
+      "prelink": "node_modules/tipsi-dropdown/scripts/pre-link.sh",
+      "postlink": "node_modules/tipsi-dropdown/scripts/post-link.sh"
     }
   },
   "peerDependencies": {
