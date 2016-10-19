@@ -26,7 +26,9 @@ cache:
     - $HOME/.gradle/wrapper/
     - example/node_modules
 
-before_install: scripts/before-install.sh
+before_install:
+   - nvm install stable
+   - scripts/before-install.sh
 install: scripts/install.sh
 
 before_script: scripts/before-ci.sh
