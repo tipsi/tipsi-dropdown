@@ -52,7 +52,7 @@ test('Test if user can select items from dropdown', async (t) => {
     android.widget.ListView[1]/android.widget.LinearLayout[4]/
     android.widget.TextView[1]`);
 
-  await driver.waitForVisible(dropdownValueIdFirst, 60000)
+  await driver.waitForVisible(dropdownValueIdFirst, 120000)
 
   const selectedItem11 = await driver.getText(dropdownValueIdFirst)
   const selectedItem21 = await driver.getText(dropdownValueIdSecond)
