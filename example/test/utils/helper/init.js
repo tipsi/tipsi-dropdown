@@ -12,7 +12,6 @@ export default async function (config) {
       platformName: config.platformName,
       platformVersion: config.platformVersion,
       app: config.app,
-      automationName: 'XCUITest',
     },
     logLevel: 'debug',
     path: '/wd/hub',
