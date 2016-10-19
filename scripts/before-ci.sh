@@ -1,6 +1,8 @@
 #!/bin/bash
 
 case "${TRAVIS_OS_NAME}" in
+  macos)
+    example/node_modules/.bin/appium --session-override > appium.out &
   linux)
     echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
     emulator -avd test -no-skin -no-audio -no-window &
