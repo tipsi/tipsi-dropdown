@@ -16,4 +16,4 @@ fi
 # Build android app
 npm run build:android
 # Run e2e tests
-npm test
+npm test:android
