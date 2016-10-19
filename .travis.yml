@@ -16,9 +16,7 @@ matrix:
           - sys-img-armeabi-v7a-android-21
           - extra-android-m2repository
 
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -rf example/node_modules/tipsi-dropdown
+before_cache: scripts/before-cache.sh
 
 cache:
   directories:
@@ -28,11 +26,8 @@ cache:
     - $HOME/.gradle/wrapper/
     - example/node_modules
 
-before_install:
-  - nvm install stable
-
+before_install: scripts/before-install.sh
 install: scripts/install.sh
 
 before_script: scripts/before-ci.sh
-
 script: scripts/ci.sh
