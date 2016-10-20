@@ -4,7 +4,7 @@ case "${TRAVIS_OS_NAME}" in
   osx)
     cd example
     set -o pipefail && npm run build:ios | xcpretty -c -f `xcpretty-travis-formatter`
-    npm run test:ios || cat ../appium.out && false
+    npm run test:ios
   ;;
   linux)
     cd example
