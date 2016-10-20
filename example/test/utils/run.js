@@ -54,8 +54,8 @@ const allowedPlatformNames = ['ios', 'android'];
       PLATFORM_VERSION = device.version
     }
     if (deviceNotSpecified && PLATFORM_NAME === 'ios') {
-      DEVICE_NAME = 'iPhone Simulator'
-      PLATFORM_VERSION = '10.0'
+      DEVICE_NAME = 'iPhone 6'
+      PLATFORM_VERSION = '9.3'
     }
 
     // Initialize Helper
