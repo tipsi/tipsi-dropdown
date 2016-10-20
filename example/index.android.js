@@ -45,6 +45,7 @@ const dropdownItemStyle2 = {
 class example extends Component {
   state = {
     value: 'three',
+    value2: 'four'
   }
 
   handleChange = (event) => {
@@ -62,7 +63,7 @@ class example extends Component {
 
   handleValueChange2 = (item, index) => {
     console.log(item, index)
-    this.setState({ value: item })
+    this.setState({ value2: item })
   }
 
   render() {
@@ -71,7 +72,7 @@ class example extends Component {
         <Dropdown
           style={dropdownStyle}
           itemStyle={dropdownItemStyle}
-          value={this.state.value}
+          selectedValue={this.state.value}
           indicator={require('./plus.png')}
           onChange={this.handleChanged}
           onValueChange={this.handleValueChange}>
@@ -83,7 +84,7 @@ class example extends Component {
           <Dropdown
             style={dropdownStyle2}
             itemStyle={dropdownItemStyle2}
-            value={this.state.value}
+            selectedValue={this.state.value2}
             indicator={require('./plus.png')}
             onChange={this.handleChanged2}
             onValueChange={this.handleValueChange2}>
