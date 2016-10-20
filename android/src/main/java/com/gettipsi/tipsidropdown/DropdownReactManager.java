@@ -21,7 +21,9 @@ import com.gettipsi.tpsdropdown.model.Style;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
@@ -46,7 +48,8 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     private Dropdown dropdown;
     private WeakReference<DropdownContainer> dropdownContainer;
     private Picasso picasso;
-    private boolean supressNotification = false;
+
+    private Map<Object, Boolean> suppressMessage = new HashMap<>();
 
     @Override
     public String getName() {
@@ -127,7 +130,7 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
     @ReactProp(name = PROP_SELECTED_INDEX)
     public void setSelected(DropdownContainer dropdown, int selected) {
-        supressNotification = true;
+        suppressMessage.put(dropdown, true);
         dropdown.getDropdown().setSelected(selected);
         updateView(dropdown);
     }
@@ -151,14 +154,14 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
             dropdown.getDropdown().setDropdownUpdateEvent(new Dropdown.DropdownUpdateEvent() {
                 @Override
                 public void onUpdate(View view, int id, int pos, String selectedItem) {
-                    if (!supressNotification) {
+                    if (!suppressMessage.get(dropdown)) {
                         ((ReactContext) dropdown.getContext())
                                 .getNativeModule(UIManagerModule.class)
                                 .getEventDispatcher().dispatchEvent(
-                                new DropdownOnChangeEvent(dropdownContainer.get().getId(), pos, tipsiAdapter.getItem(pos)));
+                                new DropdownOnChangeEvent(dropdown.getId(), pos, tipsiAdapter.getItem(pos)));
 
                     }
-                    supressNotification = false;
+                    suppressMessage.put(dropdown, false);
                 }
             });
         }
