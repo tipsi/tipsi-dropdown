@@ -9,6 +9,7 @@ const {
   TESTS_PATH = 'test/*_test_*.js',
   APP_PATH,
   PLATFORM_NAME,
+  NO_RESET,
 } = process.env
 
 let DEVICE_NAME = process.env.DEVICE_NAME
@@ -66,6 +67,7 @@ const allowedPlatformNames = ['ios', 'android'];
       platformName: PLATFORM_NAME,
       platformVersion: PLATFORM_VERSION,
       app: APP_PATH,
+      noReset: !!NO_RESET,
     })
 
     // Run Tape tests

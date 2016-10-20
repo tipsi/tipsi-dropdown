@@ -12,7 +12,7 @@ export default async function (config) {
       platformName: config.platformName,
       platformVersion: config.platformVersion,
       app: config.app,
-      noReset: true,
+      noReset: config.noReset,
     },
     logLevel: 'debug',
     path: '/wd/hub',
