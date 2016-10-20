@@ -45,8 +45,9 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
   await driver.click(dropdownIdFirst)
   await driver.click(item11)
 
-  await driver.click(dropdownIdSecond)
+  await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
   await driver.click(item21)
+
 
   const selectedItem12 = await driver.getText(dropdownValueIdFirst)
   const selectedItem22 = await driver.getText(dropdownValueIdSecond)

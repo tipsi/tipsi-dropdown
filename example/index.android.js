@@ -58,7 +58,7 @@ class example extends Component {
 
   handleValueChange = (item, index) => {
     console.log(item, index)
-    this.setState({ value: item})
+    this.setState({ value: item })
   }
 
   handleValueChange2 = (item, index) => {
@@ -81,18 +81,18 @@ class example extends Component {
           <Dropdown.Item label="Three" value="three" />
           <Dropdown.Item label="Four" value="four" />
         </Dropdown>
-          <Dropdown
-            style={dropdownStyle2}
-            itemStyle={dropdownItemStyle2}
-            selectedValue={this.state.value2}
-            indicator={require('./plus.png')}
-            onChange={this.handleChanged2}
-            onValueChange={this.handleValueChange2}>
-            <Dropdown.Item label="One" value="one" />
-            <Dropdown.Item label="Two" value="two" />
-            <Dropdown.Item label="Three" value="three" />
-            <Dropdown.Item label="Four" value="four" />
-          </Dropdown>
+        <Dropdown
+          style={dropdownStyle2}
+          itemStyle={dropdownItemStyle2}
+          selectedValue={this.state.value2}
+          indicator={require('./plus.png')}
+          onChange={this.handleChanged2}
+          onValueChange={this.handleValueChange2}>
+          <Dropdown.Item label="One" value="one" />
+          <Dropdown.Item label="Two" value="two" />
+          <Dropdown.Item label="Three" value="three" />
+          <Dropdown.Item label="Four" value="four" />
+        </Dropdown>
       </View>
     )
   }
