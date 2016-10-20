@@ -156,8 +156,9 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
                                 .getNativeModule(UIManagerModule.class)
                                 .getEventDispatcher().dispatchEvent(
                                 new DropdownOnChangeEvent(dropdownContainer.get().getId(), pos, tipsiAdapter.getItem(pos)));
-                        supressNotification = false;
+
                     }
+                    supressNotification = false;
                 }
             });
         }
