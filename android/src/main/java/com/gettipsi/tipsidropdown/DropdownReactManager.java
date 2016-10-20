@@ -26,6 +26,7 @@ import java.util.List;
 public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
     private static final String PROP_ITEMS = "items";
+    private static final String PROP_SELECTED_INDEX = "selectedIndex";
     private static final String PROP_BACKGROUND_COLOR = "backgroundColor";
     private static final String PROP_BORDER_WIDTH = "borderWidth";
     private static final String PROP_BORDER_COLOR = "borderColor";
@@ -45,6 +46,7 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     private Dropdown dropdown;
     private WeakReference<DropdownContainer> dropdownContainer;
     private Picasso picasso;
+    private boolean supressNotification = false;
 
     @Override
     public String getName() {
@@ -123,6 +125,13 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         updateView(dropdown);
     }
 
+    @ReactProp(name = PROP_SELECTED_INDEX)
+    public void setSelected(DropdownContainer dropdown, int selected) {
+        supressNotification = true;
+        dropdown.getDropdown().setSelected(selected);
+        updateView(dropdown);
+    }
+
     @ReactProp(name = PROP_INDICATOR_IMAGE_NAME)
     public void setIndicatorImageName(DropdownContainer dropdown, String value) {
         if (value.startsWith("http")) {
@@ -142,10 +151,13 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
             dropdown.getDropdown().setDropdownUpdateEvent(new Dropdown.DropdownUpdateEvent() {
                 @Override
                 public void onUpdate(View view, int id, int pos, String selectedItem) {
-                    ((ReactContext) dropdown.getContext())
-                            .getNativeModule(UIManagerModule.class)
-                            .getEventDispatcher().dispatchEvent(
-                            new DropdownOnChangeEvent(dropdownContainer.get().getId(), pos, tipsiAdapter.getItem(pos)));
+                    if (!supressNotification) {
+                        ((ReactContext) dropdown.getContext())
+                                .getNativeModule(UIManagerModule.class)
+                                .getEventDispatcher().dispatchEvent(
+                                new DropdownOnChangeEvent(dropdownContainer.get().getId(), pos, tipsiAdapter.getItem(pos)));
+                        supressNotification = false;
+                    }
                 }
             });
         }

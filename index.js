@@ -6,7 +6,7 @@ import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropTyp
 export default class Dropdown extends Component {
   static propTypes = {
     ...View.propTypes,
-    selectedValue: PropTypes.string,
+    selectedValue: PropTypes.eny,
     indicator: ImageSourcePropType,
     itemStyle: PropTypes.shape({
       backgroundColor: PropTypes.string,
@@ -82,7 +82,6 @@ stateFromProps(props) {
     return (
       <NativeDropdown
         ref={dropdown => this.dropdown = dropdown}
-        selected={this.selectedValue}
         style={style}
         items={items}
         selectedIndex={selectedIndex}
@@ -110,7 +109,6 @@ const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
   nativeOnly: {
     items: true,
     selectedIndex: true,
-    selected: true,
     value: true,
     indicatorImageName: true,
     backgroundColor: true,
