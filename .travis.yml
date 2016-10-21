@@ -24,8 +24,8 @@ cache:
     - $HOME/.gradle/wrapper/
     - example/node_modules
 
-before_cache: .travis/before-cache.sh
-before_install: .travis/before-install.sh
-install: .travis/install.sh
-before_script: .travis/before-ci.sh
-script: .travis/ci.sh
+before_cache: .ci/before-cache.sh
+before_install: .ci/before-install.sh
+install: .ci/install.sh
+before_script: .ci/before-ci.sh
+script: .ci/ci.sh
