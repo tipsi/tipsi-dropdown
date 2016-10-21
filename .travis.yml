@@ -24,7 +24,7 @@ cache:
     - example/node_modules
 
 before_cache: .ci/before-cache.sh
-before_install: .ci/before-install.sh
-install: .ci/install.sh
+before_install: . .ci/before-install.sh
+install: . .ci/install.sh
 before_script: .ci/before-ci.sh
 script: .ci/ci.sh
