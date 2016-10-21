@@ -9,6 +9,7 @@ case "${TRAVIS_OS_NAME}" in
   linux)
     node -v
     npm -v
+    nvm list
     cd example
     npm install
   ;;
