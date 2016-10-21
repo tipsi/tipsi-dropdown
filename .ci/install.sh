@@ -7,6 +7,8 @@ case "${TRAVIS_OS_NAME}" in
     pod install --project-directory=ios
   ;;
   linux)
+    node -v
+    npm -v
     cd example
     npm install
   ;;
