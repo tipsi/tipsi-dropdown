@@ -9,9 +9,9 @@ case "${TRAVIS_OS_NAME}" in
   ;;
   linux)
     . $HOME/.nvm/nvm.sh
-    nvm install stable
-    nvm alias default node
-    node -v
-    npm -v
+    . nvm install stable
+    . nvm alias default node
+    . node -v
+    . npm -v
   ;;
 esac
