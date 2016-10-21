@@ -27,12 +27,16 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
     android.widget.Spinner[1]
   `)
 
-  const item11 = idFromXPath(`//android.widget.ListView[1]/
-    android.widget.LinearLayout[1]/android.widget.TextView[1]`)
+  const item11 = idFromXPath(`
+    //android.widget.ListView[1]/android.widget.LinearLayout[1]/
+    android.widget.TextView[1]
+  `)
 
-  const item21 = idFromXPath(`//android.widget.FrameLayout[1]/
-    android.widget.ListView[1]/android.widget.LinearLayout[1]/
-    android.widget.TextView[1]`);
+  const item21 = idFromXPath(`
+    //android.widget.FrameLayout[1]/android.widget.ListView[1]/
+    android.widget.LinearLayout[1]/
+    android.widget.TextView[1]
+  `)
 
   await driver.waitForVisible(dropdownValueIdFirst, 240000)
 
@@ -47,7 +51,6 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
 
   await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
   await driver.click(item21)
-
 
   const selectedItem12 = await driver.getText(dropdownValueIdFirst)
   const selectedItem22 = await driver.getText(dropdownValueIdSecond)
