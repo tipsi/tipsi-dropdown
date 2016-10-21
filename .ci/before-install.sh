@@ -8,7 +8,8 @@ case "${TRAVIS_OS_NAME}" in
     pod repo update
   ;;
   linux)
-    source ~/.nvm/nvm.sh
+    . $HOME/.nvm/nvm.sh
     nvm install stable
+    nvm use stable
   ;;
 esac
