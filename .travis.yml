@@ -16,8 +16,7 @@ matrix:
           - sys-img-armeabi-v7a-android-21
           - extra-android-m2repository
 
-before_cache: scripts/before-cache.sh
-
+before_cache: .travis/before-cache.sh
 cache:
   directories:
     - $HOME/.nvm
@@ -28,8 +27,8 @@ cache:
 
 before_install:
    - nvm install stable
-   - scripts/before-install.sh
-install: scripts/install.sh
+   - .travis/before-install.sh
+install: .travis/install.sh
 
-before_script: scripts/before-ci.sh
-script: scripts/ci.sh
+before_script: .travis/before-ci.sh
+script: .travis/ci.sh
