@@ -10,7 +10,7 @@ case "${TRAVIS_OS_NAME}" in
   linux)
     . $HOME/.nvm/nvm.sh
     nvm install stable
-    nvm use stable
+    nvm alias default stable
     node -v
     npm -v
   ;;
