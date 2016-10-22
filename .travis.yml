@@ -25,6 +25,6 @@ cache:
 
 before_cache: . .travis/before-cache.sh
 before_install: . .travis/before-install.sh
-install: . .travis/install.sh
-before_script: . .travis/before-ci.sh
-script: . .travis/ci.sh
+install: .travis/install.sh
+before_script: .travis/before-ci.sh
+script: .travis/ci.sh
