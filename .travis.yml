@@ -4,7 +4,7 @@ sudo: required
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-    - rm -f example/node_modules/tipsi-dropdown
+    - rm -rf example/node_modules/tipsi-dropdown
 
 cache:
   directories:
