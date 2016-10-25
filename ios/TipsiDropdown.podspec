@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.homepage       = package['homepage']
   s.source         = { :git => 'https://github.com/tipsi/tipsi-dropdown', :tag => s.version }
 
-  s.source_files   = "TipsiDropdown/*"
+  s.source_files   = "TipsiDropdown/*.{h,m}"
 
+  s.dependency 'React'
   s.dependency 'TPSDropDown', '0.4.0'
 end

@@ -7,7 +7,7 @@ if [ -d ios_dir ]
 fi
 
 podfile="$ios_dir/Podfile"
-pod_dep="pod 'TipsiDropdown', :path => '../node_modules/tipsi-dropdown/ios'"
+pod_dep="pod 'TPSDropDown', '0.4.0'"
 
 echo "Checking Podfile in iOS project ($podfile)"
 
