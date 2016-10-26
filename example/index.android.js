@@ -1,51 +1,45 @@
 import React, { Component } from 'react'
-import { AppRegistry, View } from 'react-native'
+import { AppRegistry, StyleSheet, View } from 'react-native'
 import Dropdown from 'tipsi-dropdown'
+// import { Picker as Dropdown } from 'react-native'
 
-const dropdownStyle = {
-  position: 'absolute',
-  top: 25,
-  left: 25,
-  width: 156,
-  height: 40,
-}
-
-const dropdownStyle2 = {
-  position: 'absolute',
-  top: 70,
-  left: 25,
-  width: 156,
-  height: 40,
-}
-
-const dropdownItemStyle = {
-  backgroundColor: '#AAAAAA',
-  borderColor: '#0000FF',
-  fontSize: 18,
-  separatorHeight: 2,
-  separatorColor: '#0000FF',
-  fontName: 'Arial',
-  textColor: '#000000',
-  textAlignment: 'Left',
-  cornerRadius: 20,
-}
-
-const dropdownItemStyle2 = {
-  backgroundColor: '#AA00AA',
-  borderColor: '#0000FF',
-  fontSize: 18,
-  separatorHeight: 2,
-  separatorColor: '#00FF00',
-  fontName: 'Arial',
-  textColor: '#000000',
-  textAlignment: 'Left',
-  cornerRadius: 20,
-}
+const styles = StyleSheet.create({
+  dropdown1: {
+    margin: 25,
+    width: 156,
+    borderRadius: 20,
+    backgroundColor: '#AAAAAA',
+    separatorHeight: 2,
+    separatorColor: '#0000FF',
+  },
+  dropdown2: {
+    margin: 25,
+    width: 156,
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: '#0000FF',
+    backgroundColor: '#AA00AA',
+    separatorHeight: 2,
+    separatorColor: '#00FF00',
+  },
+  itemStyle1: {
+    fontSize: 18,
+    fontFamily: 'Arial',
+    color: '#000000',
+    textAlign: 'left',
+  },
+  itemStyle2: {
+    fontSize: 18,
+    fontFamily: 'Arial',
+    color: '#000000',
+    textAlign: 'left',
+  },
+})
 
 class example extends Component {
   state = {
     value: 'three',
-    value2: 'four'
+    value2: 'four',
   }
 
   handleChange = (event) => {
@@ -68,13 +62,13 @@ class example extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <Dropdown
-          style={dropdownStyle}
-          itemStyle={dropdownItemStyle}
+          style={styles.dropdown1}
+          itemStyle={styles.itemStyle1}
           selectedValue={this.state.value}
           indicator={require('./plus.png')}
-          onChange={this.handleChanged}
+          onChange={this.handleChange}
           onValueChange={this.handleValueChange}>
           <Dropdown.Item label="One" value="one" />
           <Dropdown.Item label="Two" value="two" />
@@ -82,11 +76,11 @@ class example extends Component {
           <Dropdown.Item label="Four" value="four" />
         </Dropdown>
         <Dropdown
-          style={dropdownStyle2}
-          itemStyle={dropdownItemStyle2}
+          style={styles.dropdown2}
+          itemStyle={styles.itemStyle2}
           selectedValue={this.state.value2}
           indicator={require('./plus.png')}
-          onChange={this.handleChanged2}
+          onChange={this.handleChange2}
           onValueChange={this.handleValueChange2}>
           <Dropdown.Item label="One" value="one" />
           <Dropdown.Item label="Two" value="two" />
