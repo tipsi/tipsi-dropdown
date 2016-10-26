@@ -1,25 +1,19 @@
 import React, { Component, Children, PropTypes } from 'react'
-import { requireNativeComponent, View } from 'react-native'
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
+import { requireNativeComponent, StyleSheet, View } from 'react-native'
 import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropType'
+import StyleSheetPropType from 'react-native/Libraries/StyleSheet/StyleSheetPropType'
+import StyleSheetValidation from 'react-native/Libraries/StyleSheet/StyleSheetValidation'
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
+import DropdownStylePropType from './StylePropTypes'
+import DropdownItemStylePropType from './ItemStylePropTypes'
 
 export default class Dropdown extends Component {
   static propTypes = {
     ...View.propTypes,
-    selectedValue: PropTypes.eny,
+    selectedValue: PropTypes.any,
     indicator: ImageSourcePropType,
-    itemStyle: PropTypes.shape({
-      backgroundColor: PropTypes.string,
-      fontName: PropTypes.string,
-      fontSize: PropTypes.number,
-      textAlignment: PropTypes.string,
-      cornerRadius: PropTypes.number,
-      separatorHeight: PropTypes.number,
-      separatorColor: PropTypes.string,
-      borderWidth: PropTypes.number,
-      borderColor: PropTypes.string,
-      textColor: PropTypes.string,
-    }),
+    style: StyleSheetPropType(DropdownStylePropType),
+    itemStyle: StyleSheetPropType(DropdownItemStylePropType),
     onChange: PropTypes.func,
     onValueChange: PropTypes.func,
   }
@@ -74,20 +68,41 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    const { indicator, style, itemStyle } = this.props
+    const { indicator } = this.props
     const { items, selectedIndex } = this.state
-    const indicatorImageName = indicator &&
+    // Transform styles to native props;
+    const dropdownStyle = StyleSheet.flatten(this.props.style)
+    const itemStyle = StyleSheet.flatten(this.props.itemStyle)
+    const {
+      borderWidth,
+      borderColor,
+      borderRadius,
+      backgroundColor,
+      separatorColor,
+      separatorHeight,
+      ...style
+    } = dropdownStyle;
+    const indicatorImage = indicator &&
       resolveAssetSource(indicator).uri
 
     return (
       <NativeDropdown
         ref={dropdown => this.dropdown = dropdown}
-        style={style}
+        style={[styles.dropdown, style]}
         items={items}
         selectedIndex={selectedIndex}
-        indicatorImageName={indicatorImageName}
+        cornerRadius={borderRadius}
+        borderWidth={borderWidth}
+        borderColor={borderColor}
+        backgroundColor={backgroundColor}
+        separatorColor={separatorColor}
+        separatorHeight={separatorHeight}
+        indicatorImageName={indicatorImage}
+        fontName={itemStyle.fontFamily}
+        fontSize={itemStyle.fontSize}
+        textAlignment={itemStyle.textAlign}
+        textColor={itemStyle.color}
         onChange={this.onChange}
-        {...itemStyle}
       />
     )
   }
@@ -105,19 +120,31 @@ Dropdown.Item = class extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  dropdown: {
+    // The dropdown will conform to whatever width is given, but we do
+    // have to set the component's height explicitly on the
+    // surrounding view to ensure it gets rendered.
+    height: 40,
+  },
+})
+
+// Register for our custom styles to prevent errors when
+// `separatorColor` and `separatorHeight` are specified in style prop.
+StyleSheetValidation.addValidStylePropTypes(DropdownStylePropType)
+
 const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
   nativeOnly: {
     items: true,
     selectedIndex: true,
-    value: true,
     indicatorImageName: true,
     backgroundColor: true,
     fontName: true,
     fontSize: true,
     textAlignment: true,
-    cornerRadius: true,
     separatorHeight: true,
     separatorColor: true,
+    cornerRadius: true,
     borderWidth: true,
     borderColor: true,
     textColor: true,
