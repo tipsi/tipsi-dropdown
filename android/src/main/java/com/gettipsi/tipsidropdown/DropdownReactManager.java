@@ -20,7 +20,6 @@ import com.gettipsi.tpsdropdown.DropdownStylist;
 import com.gettipsi.tpsdropdown.model.Style;
 import com.squareup.picasso.Picasso;
 
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,13 +42,10 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
     private static final String REACT_CLASS_NAME = "TipsiDropdown";
 
-    private Style style = new Style();
-
-    private Dropdown dropdown;
-    private WeakReference<DropdownContainer> dropdownContainer;
     private Picasso picasso;
 
     private Map<Object, Boolean> suppressMessage = new HashMap<>();
+    private Map<Object, Style> styles = new HashMap<>();
 
     @Override
     public String getName() {
@@ -60,71 +56,69 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     protected DropdownContainer createViewInstance(final ThemedReactContext reactContext) {
         initPicasso(reactContext);
         DropdownContainer dropdownContainer = new DropdownContainer(reactContext);
-        dropdown = dropdownContainer.getDropdown();
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START | Gravity.CENTER_VERTICAL);
-        dropdown.setLayoutParams(params);
-        this.dropdownContainer = new WeakReference<>(dropdownContainer);
+        dropdownContainer.getDropdown().setLayoutParams(params);
         return dropdownContainer;
     }
 
     @ReactProp(name = PROP_BACKGROUND_COLOR)
     public void setBackgroundColor(DropdownContainer dropdown, String value) {
-        style.setBackgroundColor(value);
+        getStyle(dropdown).setBackgroundColor(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_BORDER_WIDTH)
     public void setBorderWidth(DropdownContainer dropdown, Integer value) {
-        style.setBorderWidth(value);
+        getStyle(dropdown).setBorderWidth(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_BORDER_COLOR)
     public void setBorderColor(DropdownContainer dropdown, String value) {
-        style.setBorderColor(value);
+        getStyle(dropdown).setBorderColor(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_CORNER_RADIUS)
     public void setCornerRadius(DropdownContainer dropdown, Integer value) {
-        style.setCornerRadius(value);
+        getStyle(dropdown).setCornerRadius(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_DIVIDER_HEIGHT)
     public void setDividerHeight(DropdownContainer dropdown, Integer value) {
-        style.setSeparatorHeight(value);
+        getStyle(dropdown).setSeparatorHeight(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_DIVIDER_COLOR)
     public void setDividerColor(DropdownContainer dropdown, String value) {
-        style.setSeparatorColor(value);
+        getStyle(dropdown).setSeparatorColor(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_FONT_NAME)
     public void setFontName(DropdownContainer dropdown, String value) {
-        style.setFontName(value);
+        getStyle(dropdown).setFontName(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_FONT_SIZE)
     public void setFontSize(DropdownContainer dropdown, Integer value) {
-        style.setFontSize(value);
+        getStyle(dropdown).setFontSize(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_TEXT_COLOR)
     public void setTextColor(DropdownContainer dropdown, String value) {
-        style.setTextColor(value);
+        getStyle(dropdown).setTextColor(value);
         updateView(dropdown);
     }
 
     @ReactProp(name = PROP_TEXT_ALIGN)
     public void setTextAlign(DropdownContainer dropdown, String value) {
-        style.setTextAlignment(value);
+        getStyle(dropdown).setTextAlignment(value);
         updateView(dropdown);
     }
 
@@ -140,7 +134,7 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         if (value.startsWith("http")) {
             picasso.load(value).into(dropdown.getIcon());
         } else {
-            style.setIndicatorImageName(value);
+            getStyle(dropdown).setIndicatorImageName(value);
         }
         updateView(dropdown);
     }
@@ -168,12 +162,19 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
         updateView(dropdown);
     }
 
+    private Style getStyle(DropdownContainer container) {
+        if (styles.get(container) == null) {
+            styles.put(container, new Style());
+        }
+        return styles.get(container);
+    }
+
     private void initPicasso(Context context) {
         picasso = Picasso.with(context);
     }
 
     private void updateView(DropdownContainer dropdown) {
-        DropdownStylist.getInstance().setStyle(style);
+        DropdownStylist.getInstance().setStyle(getStyle(dropdown));
         dropdown.invalidate();
         if (dropdown.getDropdown() != null && dropdown.getDropdown().getAdapter() != null) {
             ((Adapter) dropdown.getDropdown().getAdapter()).notifyDataSetChanged();
