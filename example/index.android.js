@@ -42,6 +42,13 @@ class example extends Component {
     value2: 'four',
   }
 
+  images = {
+    one: require('./plus.png'),
+    two: require('./minus.png'),
+    three: require('./minus.png'),
+    four: require('./minus.png')
+  }
+
   handleChange = (event) => {
     console.log(event.nativeEvent)
   }
@@ -67,7 +74,7 @@ class example extends Component {
           style={styles.dropdown1}
           itemStyle={styles.itemStyle1}
           selectedValue={this.state.value}
-          indicator={require('./plus.png')}
+          indicator={this.images[this.state.value]}
           onChange={this.handleChange}
           onValueChange={this.handleValueChange}>
           <Dropdown.Item label="One" value="one" />
@@ -79,7 +86,7 @@ class example extends Component {
           style={styles.dropdown2}
           itemStyle={styles.itemStyle2}
           selectedValue={this.state.value2}
-          indicator={require('./plus.png')}
+          indicator={this.images[this.state.value2]}
           onChange={this.handleChange2}
           onValueChange={this.handleValueChange2}>
           <Dropdown.Item label="One" value="one" />

@@ -55,11 +55,7 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     @Override
     protected DropdownContainer createViewInstance(final ThemedReactContext reactContext) {
         initPicasso(reactContext);
-        DropdownContainer dropdownContainer = new DropdownContainer(reactContext);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START | Gravity.CENTER_VERTICAL);
-        dropdownContainer.getDropdown().setLayoutParams(params);
-        return dropdownContainer;
+        return new DropdownContainer(reactContext);
     }
 
     @ReactProp(name = PROP_BACKGROUND_COLOR)
