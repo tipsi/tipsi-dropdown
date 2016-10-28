@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 class example extends Component {
   state = {
     value: 'three',
-    value2: 'four',
+    value2: 'four'
   }
 
   images = {
