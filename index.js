@@ -6,7 +6,7 @@ import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropTyp
 export default class Dropdown extends Component {
   static propTypes = {
     ...View.propTypes,
-    selectedValue: PropTypes.eny,
+    selectedValue: PropTypes.any,
     indicator: ImageSourcePropType,
     itemStyle: PropTypes.shape({
       backgroundColor: PropTypes.string,
