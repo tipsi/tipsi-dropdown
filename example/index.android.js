@@ -46,7 +46,7 @@ class example extends Component {
     one: require('./plus.png'),
     two: require('./minus.png'),
     three: require('./minus.png'),
-    four: require('./minus.png')
+    // four: require('./minus.png')
   }
 
   handleChange = (event) => {
