@@ -1,6 +1,6 @@
 #!/bin/bash
 
-isIOS() {
+isOSX() {
   [ "$(uname)" == "Darwin" ]
 }
 
@@ -9,7 +9,7 @@ isIOS() {
 ###################
 
 # Check is OSX
-! isIOS && echo "Current os is not OSX, setup for iOS will be skipped"
+! isOSX && echo "Current os is not OSX, setup for iOS will be skipped"
 # Go to example project
 cd example
 # Remove tipsi-dropdown dependency
@@ -22,7 +22,7 @@ rm -rf node_modules/tipsi-dropdown
 # Install dependencies
 npm install
 # Install pods
-isIOS && pod install --project-directory=ios
+isOSX && pod install --project-directory=ios
 
 ###################
 # BEFORE BUILD    #
@@ -45,7 +45,7 @@ fi
 # Build Android app
 npm run build:android || true
 # Build iOS app
-isIOS && (npm run build:ios || true)
+isOSX && (npm run build:ios || true)
 
 ###################
 # TESTS           #
@@ -54,4 +54,4 @@ isIOS && (npm run build:ios || true)
 # Run Android e2e tests
 npm run test:android || true
 # Run iOS e2e tests
-isIOS && (npm run test:ios || true)
+isOSX && (npm run test:ios || true)
