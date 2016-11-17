@@ -1,7 +1,7 @@
 import test from 'tape-async'
 import helper from './utils/helper'
 
-const { driver, idFromResourceId, idFromXPath } = helper
+const { driver, idFromXPath } = helper
 
 test('Test if user can select items from dropdown', async (t) => {
   const dropdownValueIdFirst = idFromXPath(`
@@ -44,10 +44,10 @@ test('Test if user can select items from dropdown', async (t) => {
     android.widget.TextView[1]
   `)
 
-  const item21 = idFromXPath(`
-    //android.widget.FrameLayout[1]/android.widget.ListView[1]/
-    android.widget.LinearLayout[1]/android.widget.TextView[1]
-  `)
+  // const item21 = idFromXPath(`
+  //   //android.widget.FrameLayout[1]/android.widget.ListView[1]/
+  //   android.widget.LinearLayout[1]/android.widget.TextView[1]
+  // `)
 
   const item22 = idFromXPath(`
     //android.widget.FrameLayout[1]/android.widget.ListView[1]/
@@ -77,7 +77,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('Two', selectedItem12, 'User should see selected item "Two" in first dropdown')
   t.equal('One', selectedItem22, 'User should see selected item "One" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdFirst).click(dropdownIdFirst)
+  await driver.waitForVisible(dropdownIdFirst, 2000).click(dropdownIdFirst)
   await driver.click(item13)
 
   const selectedItem13 = await driver.getText(dropdownValueIdFirst)
@@ -85,7 +85,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('Three', selectedItem13, 'User should see selected item "Three" in first dropdown')
   t.equal('One', selectedItem23, 'User should see selected item "One" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdFirst).click(dropdownIdFirst)
+  await driver.waitForVisible(dropdownIdFirst, 2000).click(dropdownIdFirst)
   await driver.click(item14)
 
   const selectedItem14 = await driver.getText(dropdownValueIdFirst)
@@ -93,7 +93,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('Four', selectedItem14, 'User should see selected item "Four" in first dropdown')
   t.equal('One', selectedItem24, 'User should see selected item "One" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdFirst).click(dropdownIdFirst)
+  await driver.waitForVisible(dropdownIdFirst, 2000).click(dropdownIdFirst)
   await driver.click(item11)
 
   const selectedItem15 = await driver.getText(dropdownValueIdFirst)
@@ -101,7 +101,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('One', selectedItem15, 'User should see selected item "One" in first dropdown')
   t.equal('One', selectedItem25, 'User should see selected item "One" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
+  await driver.waitForVisible(dropdownIdSecond, 2000).click(dropdownIdSecond)
   await driver.click(item22)
 
   const selectedItem16 = await driver.getText(dropdownValueIdFirst)
@@ -109,7 +109,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('One', selectedItem16, 'User should see selected item "One" in first dropdown')
   t.equal('Two', selectedItem26, 'User should see selected item "Two" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
+  await driver.waitForVisible(dropdownIdSecond, 2000).click(dropdownIdSecond)
   await driver.click(item23)
 
   const selectedItem17 = await driver.getText(dropdownValueIdFirst)
@@ -117,7 +117,7 @@ test('Test if user can select items from dropdown', async (t) => {
   t.equal('One', selectedItem17, 'User should see selected item "One" in first dropdown')
   t.equal('Three', selectedItem27, 'User should see selected item "Three" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
+  await driver.waitForVisible(dropdownIdSecond, 2000).click(dropdownIdSecond)
   await driver.click(item24)
 
   const selectedItem18 = await driver.getText(dropdownValueIdFirst)
