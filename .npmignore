@@ -1,2 +1,5 @@
 .babelrc
 .eslintrc
+.travis
+.travis.yml
+example

@@ -1,10 +1,7 @@
 package com.gettipsi.tipsidropdown;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
@@ -55,11 +52,9 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
     @Override
     protected DropdownContainer createViewInstance(final ThemedReactContext reactContext) {
         initPicasso(reactContext);
-        DropdownContainer dropdownContainer = new DropdownContainer(reactContext);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.START | Gravity.CENTER_VERTICAL);
-        dropdownContainer.getDropdown().setLayoutParams(params);
-        return dropdownContainer;
+        DropdownContainer container = new DropdownContainer(reactContext);
+        getStyle(container).setIndicatorImageName("empty");
+        return container;
     }
 
     @ReactProp(name = PROP_BACKGROUND_COLOR)
@@ -131,10 +126,11 @@ public class DropdownReactManager extends SimpleViewManager<DropdownContainer> {
 
     @ReactProp(name = PROP_INDICATOR_IMAGE_NAME)
     public void setIndicatorImageName(DropdownContainer dropdown, String value) {
-        if (value.startsWith("http")) {
+        if (value != null && value.startsWith("http")) {
             picasso.load(value).into(dropdown.getIcon());
+            getStyle(dropdown).setIndicatorImageName(null);
         } else {
-            getStyle(dropdown).setIndicatorImageName(value);
+            getStyle(dropdown).setIndicatorImageName(value == null ? "empty" : value);
         }
         updateView(dropdown);
     }

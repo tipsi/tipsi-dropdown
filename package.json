@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "A react-native Dropdown component for iOS and Android",
   "nativePackage": true,
-  "main": "index.js",
+  "main": "src/index.js",
+  "scripts": {
+    "ci": "scripts/local-ci.sh"
+  },
   "directories": {
     "example": "example"
   },
@@ -17,6 +20,12 @@
     "url": "https://github.com/tipsi/tipsi-dropdown/issues"
   },
   "homepage": "https://github.com/tipsi/tipsi-dropdown#readme",
+  "rnpm": {
+    "commands": {
+      "prelink": "node_modules/tipsi-dropdown/scripts/pre-link.sh",
+      "postlink": "node_modules/tipsi-dropdown/scripts/post-link.sh"
+    }
+  },
   "peerDependencies": {
     "react-native": "*"
   },

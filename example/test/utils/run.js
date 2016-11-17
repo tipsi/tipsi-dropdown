@@ -1,19 +1,21 @@
-import path from 'path'
 import findAndroidDevice from './find-android-device'
 import appiumIsRunning from './appium-is-running'
 import runTapeTests from './run-tape-tests'
 import helper from './helper'
 
 const {
-  APPIUM_HOST = 'localhost',
+  APPIUM_HOST = '127.0.0.1',
   APPIUM_PORT = '4723',
-  APK_PACKAGE = 'com.example',
-  APK_PATH = path.resolve(__dirname, '../../android/app/build/outputs/apk/app-release.apk'),
-  TEST_CASES_PATH = 'test/*_test_*.js',
+  TESTS_PATH = 'test/*_test_*.js',
+  APP_PATH,
+  PLATFORM_NAME,
+  NO_RESET,
 } = process.env
 
 let DEVICE_NAME = process.env.DEVICE_NAME
-let DEVICE_PLATFORM = process.env.DEVICE_PLATFORM;
+let PLATFORM_VERSION = process.env.PLATFORM_VERSION
+
+const allowedPlatformNames = ['ios', 'android'];
 
 /* eslint no-console: 0 */
 (async function run() {
@@ -27,12 +29,34 @@ let DEVICE_PLATFORM = process.env.DEVICE_PLATFORM;
     // Check Appium
     await appiumIsRunning(APPIUM_HOST, APPIUM_PORT)
     console.log(`Appium is running on: ${APPIUM_HOST}:${APPIUM_PORT}`)
-    if (!DEVICE_NAME || !DEVICE_PLATFORM) {
-      // Check Android device
+
+    // Check Platform Name
+    if (!PLATFORM_NAME) {
+      console.log('PLATFORM_NAME is not specified')
+      return
+    }
+    if (!allowedPlatformNames.includes(PLATFORM_NAME)) {
+      console.log(`PLATFORM_NAME should be one of: ${allowedPlatformNames}`)
+      return
+    }
+
+    // Check APP file
+    if (!APP_PATH) {
+      console.log('APP_PATH is not specified')
+      return
+    }
+
+    // Check Device Name
+    const deviceNotSpecified = !DEVICE_NAME || !PLATFORM_VERSION
+    if (deviceNotSpecified && PLATFORM_NAME === 'android') {
       const device = await findAndroidDevice()
-      console.log(`Found next android device: ${device.id}`)
+      console.log(`Found next android device: ${device.id}, version: ${device.version}`)
       DEVICE_NAME = device.id
-      DEVICE_PLATFORM = device.version
+      PLATFORM_VERSION = device.version
+    }
+    if (deviceNotSpecified && PLATFORM_NAME === 'ios') {
+      DEVICE_NAME = 'iPhone 6'
+      PLATFORM_VERSION = '9.3'
     }
 
     // Initialize Helper
@@ -40,13 +64,14 @@ let DEVICE_PLATFORM = process.env.DEVICE_PLATFORM;
       appiumHost: APPIUM_HOST,
       appiumPort: APPIUM_PORT,
       deviceName: DEVICE_NAME,
-      devicePlatform: DEVICE_PLATFORM,
-      apkPackage: APK_PACKAGE,
-      apkPath: APK_PATH,
+      platformName: PLATFORM_NAME,
+      platformVersion: PLATFORM_VERSION,
+      app: APP_PATH,
+      noReset: !!NO_RESET,
     })
 
     // Run Tape tests
-    await runTapeTests(TEST_CASES_PATH)
+    await runTapeTests(TESTS_PATH)
 
     // Close Helper
     await helper.release()
@@ -56,5 +81,7 @@ let DEVICE_PLATFORM = process.env.DEVICE_PLATFORM;
 
     // Close Helper
     await helper.release()
+    // Exit with failure code
+    process.exit(1)
   }
 }())
