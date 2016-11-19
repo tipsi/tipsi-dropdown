@@ -46,19 +46,22 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
   t.equal('Three', selectedItem11, 'User should see selected item "Three" in first dropdown')
   t.equal('Four', selectedItem21, 'User should see selected item "Four" in second dropdown')
 
-  await driver.waitForVisible(dropdownIdFirst, 2000).click(dropdownIdFirst)
+  await driver.click(dropdownIdFirst)
+
+  await driver.waitForVisible(item11, 2000)
   await driver.click(item11)
 
   await driver.waitForVisible(dropdownIdSecond, 2000).click(dropdownIdSecond)
+
+  await driver.waitForVisible(item21, 2000)
   await driver.click(item21)
 
   await driver.waitForVisible(dropdownValueIdFirst, 2000)
   const selectedItem12 = await driver.getText(dropdownValueIdFirst)
 
-  t.equal('One', selectedItem12, 'User should see selected item "One" in first dropdown')
-
   await driver.waitForVisible(dropdownValueIdSecond, 2000)
   const selectedItem22 = await driver.getText(dropdownValueIdSecond)
 
+  t.equal('One', selectedItem12, 'User should see selected item "One" in first dropdown')
   t.equal('One', selectedItem22, 'User should see selected item "One" in second dropdown')
 })
