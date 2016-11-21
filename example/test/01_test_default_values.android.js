@@ -38,23 +38,37 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
     android.widget.TextView[1]
   `)
 
-  await driver.waitForVisible(dropdownValueIdFirst, 240000)
+  try {
+    await driver.waitForVisible(dropdownValueIdFirst, 240000)
 
-  const selectedItem11 = await driver.getText(dropdownValueIdFirst)
-  const selectedItem21 = await driver.getText(dropdownValueIdSecond)
+    const selectedItem11 = await driver.getText(dropdownValueIdFirst)
+    const selectedItem21 = await driver.getText(dropdownValueIdSecond)
 
-  t.equal('Three', selectedItem11, 'User should see selected item "Three" in first dropdown')
-  t.equal('Four', selectedItem21, 'User should see selected item "Four" in second dropdown')
+    t.equal('Three', selectedItem11, 'User should see selected item "Three" in first dropdown')
+    t.equal('Four', selectedItem21, 'User should see selected item "Four" in second dropdown')
 
-  await driver.click(dropdownIdFirst)
-  await driver.click(item11)
+    await driver.click(dropdownIdFirst)
 
-  await driver.waitForVisible(dropdownIdSecond).click(dropdownIdSecond)
-  await driver.click(item21)
+    await driver.waitForVisible(item11, 2000)
+    await driver.click(item11)
 
-  const selectedItem12 = await driver.getText(dropdownValueIdFirst)
-  const selectedItem22 = await driver.getText(dropdownValueIdSecond)
+    await driver.waitForVisible(dropdownIdSecond, 2000).click(dropdownIdSecond)
 
-  t.equal('One', selectedItem12, 'User should see selected item "One" in first dropdown')
-  t.equal('One', selectedItem22, 'User should see selected item "One" in second dropdown')
+    await driver.waitForVisible(item21, 2000)
+    await driver.click(item21)
+
+    await driver.waitForVisible(dropdownValueIdFirst, 2000)
+    const selectedItem12 = await driver.getText(dropdownValueIdFirst)
+
+    await driver.waitForVisible(dropdownValueIdSecond, 2000)
+    const selectedItem22 = await driver.getText(dropdownValueIdSecond)
+
+    t.equal('One', selectedItem12, 'User should see selected item "One" in first dropdown')
+    t.equal('One', selectedItem22, 'User should see selected item "One" in second dropdown')
+  } catch (error) {
+    await helper.screenshot()
+    await helper.source()
+
+    throw error
+  }
 })
