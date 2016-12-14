@@ -57,7 +57,7 @@ const dropdowns = [
 test('Test if user can see default seleted items on dropdowns', async (t) => {
   try {
     for (const {dropdown, dropdownDescription} of dropdowns) {
-      await driver.waitForVisible(dropdown.view.dropdown, 2000);
+      await driver.waitForVisible(dropdown.view.dropdown, 10000);
       t.pass(`The user should see ${dropdownDescription}`);
 
       const initialText = dropdown.model.items[dropdown.model.initialIndex].text;

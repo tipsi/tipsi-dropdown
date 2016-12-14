@@ -67,13 +67,13 @@ const dropdowns = [
 test('Test if user can select items from dropdown', async (t) => {
   try {
     for (const {dropdown, dropdownDescription} of dropdowns) {
-      await driver.waitForVisible(dropdown.view.dropdown, 2000);
+      await driver.waitForVisible(dropdown.view.dropdown, 10000);
       t.pass(`The user should see ${dropdownDescription}`);
 
       await driver.click(dropdown.view.dropdown);
       t.pass(`The user should be able to click on ${dropdownDescription}`);
 
-      await driver.waitForVisible(dropdown.view.items, 2000);
+      await driver.waitForVisible(dropdown.view.items, 10000);
       t.pass(`The user should see items in ${dropdownDescription}`);
 
       const itemsCount = dropdown.model.items.length;
