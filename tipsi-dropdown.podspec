@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.source_files   = "ios/TipsiDropdown/*.{h,m}"
 
   s.dependency 'React'
-  s.dependency 'TPSDropDown', '0.4.0'
+  s.dependency 'TPSDropDown', '~> 1.0'
 end

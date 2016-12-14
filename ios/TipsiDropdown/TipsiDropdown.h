@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <TPSDropDown/TPSDropDown.h>
 
-@interface TipsiDropdown : NSObject
+#import "UIView+React.h"
+
+@interface TipsiDropdown : TPSDropDown
+
+@property (nonatomic, copy) RCTBubblingEventBlock onChange;
 
 @end

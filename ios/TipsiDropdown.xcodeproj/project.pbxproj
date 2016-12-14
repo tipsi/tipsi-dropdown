@@ -10,6 +10,7 @@
 		3A0E93BF1DBE3AC8001FE08C /* TipsiDropdownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E93BE1DBE3AC8001FE08C /* TipsiDropdownManager.m */; };
 		3AF018191DB6844300D89CEA /* TipsiDropdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF018181DB6844300D89CEA /* TipsiDropdown.m */; };
 		3AF0181A1DB6844300D89CEA /* TipsiDropdown.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AF018171DB6844300D89CEA /* TipsiDropdown.h */; };
+		B8E1804C1E013A200037102E /* TipsiDropdownJSONItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E1804B1E013A200037102E /* TipsiDropdownJSONItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		3AF018141DB6844300D89CEA /* libTipsiDropdown.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTipsiDropdown.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF018171DB6844300D89CEA /* TipsiDropdown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TipsiDropdown.h; sourceTree = "<group>"; };
 		3AF018181DB6844300D89CEA /* TipsiDropdown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TipsiDropdown.m; sourceTree = "<group>"; };
+		B8E1804A1E013A200037102E /* TipsiDropdownJSONItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsiDropdownJSONItem.h; sourceTree = "<group>"; };
+		B8E1804B1E013A200037102E /* TipsiDropdownJSONItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsiDropdownJSONItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 		3AF018161DB6844300D89CEA /* TipsiDropdown */ = {
 			isa = PBXGroup;
 			children = (
+				B8E1804A1E013A200037102E /* TipsiDropdownJSONItem.h */,
+				B8E1804B1E013A200037102E /* TipsiDropdownJSONItem.m */,
 				3AF018171DB6844300D89CEA /* TipsiDropdown.h */,
 				3AF018181DB6844300D89CEA /* TipsiDropdown.m */,
 				3A0E93BD1DBE3AC8001FE08C /* TipsiDropdownManager.h */,
@@ -129,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0E93BF1DBE3AC8001FE08C /* TipsiDropdownManager.m in Sources */,
+				B8E1804C1E013A200037102E /* TipsiDropdownJSONItem.m in Sources */,
 				3AF018191DB6844300D89CEA /* TipsiDropdown.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
