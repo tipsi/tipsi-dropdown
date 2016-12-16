@@ -1,5 +1,5 @@
 import React, { Component, Children, PropTypes } from 'react'
-import { requireNativeComponent, StyleSheet, View } from 'react-native'
+import { requireNativeComponent, StyleSheet, View, Platform } from 'react-native'
 import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropType'
 import StyleSheetPropType from 'react-native/Libraries/StyleSheet/StyleSheetPropType'
 import StyleSheetValidation from 'react-native/Libraries/StyleSheet/StyleSheetValidation'
@@ -85,26 +85,49 @@ export default class Dropdown extends Component {
     const indicatorImage = indicator &&
       resolveAssetSource(indicator).uri
 
-    return (
-      <NativeDropdown
-        ref={dropdown => this.dropdown = dropdown}
-        style={[styles.dropdown, style]}
-        items={items}
-        selectedIndex={selectedIndex}
-        cornerRadius={borderRadius}
-        borderWidth={borderWidth}
-        borderColor={borderColor}
-        backgroundColor={backgroundColor}
-        separatorColor={separatorColor}
-        separatorHeight={separatorHeight}
-        indicatorImageName={indicatorImage}
-        fontName={itemStyle.fontFamily}
-        fontSize={itemStyle.fontSize}
-        textAlignment={itemStyle.textAlign}
-        textColor={itemStyle.color}
-        onChange={this.onChange}
-      />
-    )
+    if (Platform.OS === 'android') {
+      return (
+        <NativeDropdown
+          ref={dropdown => this.dropdown = dropdown}
+          style={[styles.dropdown, style]}
+          items={items}
+          selectedIndex={selectedIndex}
+          cornerRadius={borderRadius}
+          borderWidth={borderWidth}
+          borderColor={borderColor}
+          backgroundColor={backgroundColor}
+          separatorColor={separatorColor}
+          separatorHeight={separatorHeight}
+          indicatorImageName={indicatorImage}
+          fontName={itemStyle.fontFamily}
+          fontSize={itemStyle.fontSize}
+          textAlignment={itemStyle.textAlign}
+          textColor={itemStyle.color}
+          onChange={this.onChange}
+        />
+      );
+    } else {
+      return (
+        <NativeDropdown
+          ref={dropdown => this.dropdown = dropdown}
+          style={[styles.dropdown, style]}
+          items={items}
+          selectedIndex={selectedIndex}
+          cornerRadius={borderRadius}
+          borderWidth={borderWidth}
+          borderColor={borderColor}
+          backgroundColor={backgroundColor}
+          separatorColor={separatorColor}
+          separatorHeight={separatorHeight}
+          indicatorImage={indicator}
+          fontName={itemStyle.fontFamily}
+          fontSize={itemStyle.fontSize}
+          textAlignment={itemStyle.textAlign}
+          textColor={itemStyle.color}
+          onChange={this.onChange}
+        />
+      );
+    }
   }
 }
 
@@ -133,20 +156,42 @@ const styles = StyleSheet.create({
 // `separatorColor` and `separatorHeight` are specified in style prop.
 StyleSheetValidation.addValidStylePropTypes(DropdownStylePropType)
 
-const NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
-  nativeOnly: {
-    items: true,
-    selectedIndex: true,
-    indicatorImageName: true,
-    backgroundColor: true,
-    fontName: true,
-    fontSize: true,
-    textAlignment: true,
-    separatorHeight: true,
-    separatorColor: true,
-    cornerRadius: true,
-    borderWidth: true,
-    borderColor: true,
-    textColor: true,
-  },
-})
+if (Platform.OS === 'android') {
+  var NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
+    nativeOnly: {
+      items: true,
+      selectedIndex: true,
+      indicatorImageName: true,
+      backgroundColor: true,
+      fontName: true,
+      fontSize: true,
+      textAlignment: true,
+      separatorHeight: true,
+      separatorColor: true,
+      cornerRadius: true,
+      borderWidth: true,
+      borderColor: true,
+      textColor: true,
+    },
+  });
+} else {
+  var NativeDropdown = requireNativeComponent('TipsiDropdown', Dropdown, {
+    nativeOnly: {
+      items: true,
+      selectedIndex: true,
+      indicatorImage: true,
+      backgroundColor: true,
+      fontFamily: true,
+      fontSize: true,
+      fontWeight: true,
+      fontStyle: true,
+      textAlignment: true,
+      separatorHeight: true,
+      separatorColor: true,
+      cornerRadius: true,
+      borderWidth: true,
+      borderColor: true,
+      textColor: true,
+    },
+  });
+}
