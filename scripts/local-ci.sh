@@ -2,6 +2,24 @@
 
 set -e
 
+if [[ $@ == *"--skip-new"* ]]; then
+  skip_new=true
+else
+  skip_new=false
+fi
+
+proj_dir_old=example
+proj_dir_new=example_tmp
+
+react_native_ver=$(cd $proj_dir_old && npm view react-native version)
+
+files_to_copy=(
+  $proj_dir_old/package.json
+  $proj_dir_old/index.*.js
+  $proj_dir_old/src
+  $proj_dir_old/test
+)
+
 isOSX() {
   [ "$(uname)" == "Darwin" ]
 }
@@ -12,10 +30,28 @@ isOSX() {
 
 # Check is OSX
 ! isOSX && echo "Current os is not OSX, setup for iOS will be skipped"
-# Go to example project
-cd example
-# Remove tipsi-dropdown dependency
-rm -rf node_modules/tipsi-dropdown
+# Install react-native-cli if not exist
+if ! type react-native > /dev/null; then
+  npm install -g react-native-cli
+fi
+
+if $skip_new; then
+  echo "Creating new example project skipped"
+else
+  # Remove old test project if exist
+  rm -rf $proj_dir_new
+  # Init new test project
+  react-native init $proj_dir_new --version $react_native_ver
+  # Copy necessary files from example project
+  for i in ${files_to_copy[@]}; do
+    if [ -e $i ]; then
+      cp -rp $i $proj_dir_new
+    fi
+  done
+fi
+
+# Go to new test project
+cd $proj_dir_new
 
 ###################
 # INSTALL         #
@@ -23,8 +59,8 @@ rm -rf node_modules/tipsi-dropdown
 
 # Install dependencies
 npm install
-# Install pods
-isOSX && pod install --project-directory=ios
+# Link project
+react-native link
 
 ###################
 # BEFORE BUILD    #
