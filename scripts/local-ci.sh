@@ -116,6 +116,6 @@ isOSX && npm run build:ios
 # Run Android e2e tests
 npm run test:android
 # Run iOS e2e tests
-if isOSX
-  then npm run test:ios
+if isOSX; then
+  npm run test:ios
 fi
