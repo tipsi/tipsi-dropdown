@@ -13,6 +13,8 @@ init_new_example_project() {
     src
     scripts
     tests
+    plus.png
+    minus.png
   )
 
   mkdir tmp

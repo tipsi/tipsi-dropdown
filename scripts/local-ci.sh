@@ -27,6 +27,8 @@ files_to_copy=(
   src
   scripts
   tests
+  plus.png
+  minus.png
 )
 
 isOSX() {
