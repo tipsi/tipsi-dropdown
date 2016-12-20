@@ -17,7 +17,7 @@ fi
 proj_dir_old=example
 proj_dir_new=example_tmp
 
-react_native_version=$(cd $proj_dir_old && npm view react-native version)
+react_native_version=$(cat $proj_dir_old/package.json | sed -n 's/"react-native": "\(\^|~\)*\(.*\)",*/\2/p')
 library_name=$(node -p "require('./package.json').name")
 
 files_to_copy=(
@@ -49,6 +49,8 @@ if ($skip_new && ! $use_old); then
   # Go to new test project
   cd $proj_dir_new
 elif (! $skip_new && ! $use_old); then
+  # Remove react-native to avoid affecting react-native init
+  rm -rf node_modules/react-native
   echo "Creating new example project"
   # Remove old test project and tmp dir if exist
   rm -rf $proj_dir_new tmp
@@ -73,9 +75,6 @@ else
   # Go to old test project
   cd $proj_dir_old
 fi
-
-# Go to new test project
-cd $proj_dir_new
 
 ###################
 # INSTALL         #
