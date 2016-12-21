@@ -31,7 +31,7 @@ files_to_copy=(
   minus.png
 )
 
-isOSX() {
+isMacOS() {
   [ "$(uname)" == "Darwin" ]
 }
 
@@ -39,8 +39,8 @@ isOSX() {
 # BEFORE INSTALL  #
 ###################
 
-# Check is OSX
-! isOSX && echo "Current os is not OSX, setup for iOS will be skipped"
+# Check is macOS
+! isMacOS && echo "Current os is not macOS, setup for iOS will be skipped"
 # Install react-native-cli if not exist
 if ! type react-native > /dev/null; then
   npm install -g react-native-cli
@@ -109,7 +109,7 @@ fi
 # Build Android app
 npm run build:android
 # Build iOS app
-isOSX && npm run build:ios
+isMacOS && npm run build:ios
 
 ###################
 # TESTS           #
@@ -118,6 +118,6 @@ isOSX && npm run build:ios
 # Run Android e2e tests
 npm run test:android
 # Run iOS e2e tests
-if isOSX; then
+if isMacOS; then
   npm run test:ios
 fi
