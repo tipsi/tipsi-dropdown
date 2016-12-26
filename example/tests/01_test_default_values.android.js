@@ -1,5 +1,5 @@
 import test from 'tape-async'
-import helper from './utils/helper'
+import helper from 'tipsi_appium/src/helper'
 
 const { driver, idFromXPath, waitForText } = helper
 

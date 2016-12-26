@@ -1,5 +1,5 @@
 import test from 'tape-async'
-import helper from './utils/helper'
+import helper from 'tipsi_appium/src/helper'
 
 const { driver, idFromXPath } = helper
 
@@ -63,7 +63,7 @@ test('Test if user can see default seleted items on dropdowns', async (t) => {
       const initialText = dropdown.model.items[dropdown.model.initialIndex].text;
       const sut_initialText = await driver.getText(dropdown.view.dropdown);
       t.equal(sut_initialText, initialText, `The user should see selected item "${initialText}" in ${dropdownDescription}`);
-    };
+    }
   } catch (error) {
     await helper.screenshot()
     await helper.source()
