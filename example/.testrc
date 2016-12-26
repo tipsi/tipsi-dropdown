@@ -1,10 +1,11 @@
 {
-  "testsGlob": "./tests/*_test_*.ios.js",
   "ios": {
+    "testsGlob": "./tests/*_test_*.ios.js",
     "appPath": "./ios/build/Build/Products/Release-iphonesimulator/example.app",
     "noReset": true
   },
   "android": {
+    "testsGlob": "./tests/*_test_*.android.js",
     "appPath": "./android/app/build/outputs/apk/app-release.apk"
   }
 }
