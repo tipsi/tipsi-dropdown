@@ -7,6 +7,7 @@ init_new_example_project() {
   react_native_version=$(cat $proj_dir_old/package.json | sed -n 's/"react-native": "\(\^|~\)*\(.*\)",*/\2/p')
 
   files_to_copy=(
+    .testrc
     package.json
     index.{ios,android}.js
     android/app/build.gradle
