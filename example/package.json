@@ -11,8 +11,8 @@
     "build:android": "npm-run-all clean build:android:*",
     "build:ios": "cd ios && xcodebuild build -workspace example.xcworkspace -scheme example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO OTHER_LDFLAGS='$(inherited) -ObjC -lc++' -destination 'platform=iOS Simulator,name=iPhone 6' -configuration Release -derivedDataPath build",
     "build": "npm-run-all build:*",
-    "test:android": "PLATFORM_NAME=android appium-helper",
-    "test:ios": "PLATFORM_NAME=ios appium-helper",
+    "test:android": "appium-helper --platform android",
+    "test:ios": "appium-helper --platform ios",
     "test": "npm-run-all test:*"
   },
   "dependencies": {
