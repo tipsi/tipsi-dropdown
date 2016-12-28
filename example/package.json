@@ -18,13 +18,13 @@
   "dependencies": {
     "react": "15.3.2",
     "react-native": "0.35.0",
-    "tipsi-dropdown": "../",
-    "tipsi_appium": "github:tipsi/tipsi_appium#development"
+    "tipsi-dropdown": "../"
   },
   "devDependencies": {
     "appium": "1.6.1-beta",
     "npm-run-all": "^3.1.1",
     "tape": "^4.6.2",
-    "tape-async": "^2.1.1"
+    "tape-async": "^2.1.1",
+    "tipsi-appium-helper": "github:tipsi/tipsi-appium-helper#development"
   }
 }
