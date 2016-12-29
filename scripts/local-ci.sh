@@ -21,7 +21,7 @@ react_native_version=$(cat $proj_dir_old/package.json | sed -n 's/"react-native"
 library_name=$(node -p "require('./package.json').name")
 
 files_to_copy=(
-  .testrc
+  .appiumhelperrc
   package.json
   index.{ios,android}.js
   android/app/build.gradle
