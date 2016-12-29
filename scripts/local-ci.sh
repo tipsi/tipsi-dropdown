@@ -27,7 +27,7 @@ files_to_copy=(
   android/app/build.gradle
   src
   scripts
-  tests
+  __tests__
   plus.png
   minus.png
 )
@@ -61,6 +61,8 @@ elif (! $skip_new && ! $use_old); then
   mkdir tmp
   cd tmp
   react-native init $proj_dir_old --version $react_native_version
+  # Remove __tests__ folder to avoid conflicts
+  rm -rf $proj_dir_old/__tests__
   # Move new project from tmp dir and remove tmp dir
   cd ..
   mv tmp/$proj_dir_old $proj_dir_new
@@ -94,14 +96,8 @@ react-native link
 ###################
 
 # Run appium
-appiumPID=$(ps -A | grep -v grep | grep appium | awk '{print $1}')
-if [ -z $appiumPID ]; then
-  npm run appium > /dev/null 2>&1 &
-else
-  echo "appium is already running, restart appium"
-  kill -9 $appiumPID
-  npm run appium > /dev/null 2>&1 &
-fi
+pkill -9 -f appium
+npm run appium > /dev/null 2>&1 &
 
 ###################
 # BUILD           #
