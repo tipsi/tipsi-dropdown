@@ -42,4 +42,14 @@
     return [self.JSON valueForKey:@"label"];
 }
 
+// We don't support attributedTitle for react native module
+- (NSAttributedString *)attributedTitle {
+    return nil;
+}
+
+// We don't support iconName for react native module
+- (NSString *)iconName {
+    return nil;
+}
+
 @end
